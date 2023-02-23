@@ -2,12 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from numpy import load
-import matplotlib.pyplot as plt
 import random
 from sklearn.metrics import silhouette_score
 from sklearn.metrics.cluster import homogeneity_score, completeness_score, contingency_matrix
 
-st.set_page_config(page_title="Deyu & Co.", layout="wide",
+st.set_page_config(page_title="Product Recommendation", layout="wide",
                    initial_sidebar_state="expanded", menu_items=None, page_icon="random")
 
 @st.cache_data
@@ -205,10 +204,16 @@ with tab3:
     st.write("Initialisation Method: k-means++")
     st.subheader("Evaluation Metrics")
     st.write("Homogeneity Score")
+    st.write("– A clustering result satisfies homogeneity if all of its clusters contain only data points which are members of a single class.")
+    st.write("Score between 0.0 and 1.0. 1.0 stands for perfectly homogeneous labeling.")
     st.write(h_score)
     st.write("Completeness Score")
+    st.write("– A clustering result satisfies completeness if all the data points that are members of a given class are elements of the same cluster.")
+    st.write("Score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling.")
     st.write(c_score)
     st.write("Silhouette Score")
+    st.write("– A measure of how similar an object is to its own cluster(cohesion) compared to other clusters(separation)")
+    st.write("The best value is 1 and the worst value is -1. Values near 0 indicate overlapping clusters. Negative values generally indicate that a sample has been assigned to the wrong cluster, as a different cluster is more similar.")
     st.write(s_score)
 
 with tab4:
@@ -217,7 +222,7 @@ with tab4:
     st.markdown("### *Thank you* Deyu!")
     st.write()
     # our_clusters, true_clusters = make_plots()
-    
+
     # st.subheader("Clustering of pre-processed data")
     # st.pyplot(our_clusters)
 
