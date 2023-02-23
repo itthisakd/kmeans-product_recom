@@ -119,11 +119,9 @@ def img(i):
 def get_similar_wrapped(sample_index, n_similar):
     return get_similar(X=X_tsne, labels=labels, groups=groups, sample_index=sample_index, n_similar=n_similar)
 
-st.write("idx state", st.session_state.sample_idx)
 
 tab1, tab2, tab3, tab4 = st.tabs(["Top Picks", "Browse by Category", "Model Evaluation", "Acknowledgements"])
 with tab1:
-    st.write("idx state", st.session_state.sample_idx)
     # col1,col2=st.columns(2)
     st.subheader("Choose products to view similar recommendations")
     # with col1:
@@ -172,7 +170,6 @@ with tab2:
 
 st.sidebar.markdown(
     "## Select a product to get recommendations")
-st.sidebar.write("idx state", st.session_state.sample_idx)
 recom_no = st.sidebar.slider('Number of Recommendations', 0, 50, 10, 5)
 if st.session_state.sample_idx >= 0:
     st.sidebar.markdown("# If you like... ")
@@ -204,14 +201,17 @@ with tab3:
     st.write("Initialisation Method: k-means++")
     st.subheader("Evaluation Metrics")
     st.write("Homogeneity Score")
-    st.write("– A clustering result satisfies homogeneity if all of its clusters contain only data points which are members of a single class. \nScore between 0.0 and 1.0. 1.0 stands for perfectly homogeneous labeling.")
     st.write(h_score)
+    st.write("– A clustering result satisfies homogeneity if all of its clusters contain only data points which are members of a single class. \nScore between 0.0 and 1.0. 1.0 stands for perfectly homogeneous labeling.  \n")
+
     st.write("Completeness Score")
-    st.write("– A clustering result satisfies completeness if all the data points that are members of a given class are elements of the same cluster. \n Score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling.")
     st.write(c_score)
+    st.write("– A clustering result satisfies completeness if all the data points that are members of a given class are elements of the same cluster. \n Score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling. \n")
+
     st.write("Silhouette Score")
-    st.write("– A measure of how similar an object is to its own cluster(cohesion) compared to other clusters(separation). \n The best value is 1 and the worst value is -1. Values near 0 indicate overlapping clusters. Negative values generally indicate that a sample has been assigned to the wrong cluster, as a different cluster is more similar.")
     st.write(s_score)
+    st.write("– A measure of how similar an object is to its own cluster(cohesion) compared to other clusters(separation). \n The best value is 1 and the worst value is -1. Values near 0 indicate overlapping clusters. Negative values generally indicate that a sample has been assigned to the wrong cluster, as a different cluster is more similar.")
+
 
 with tab4:
     st.header("Acknowledgements")
