@@ -142,7 +142,7 @@ with tab1:
     for i in range(4):
         with subcols[i]:
             for idx in initial_ids[st.session_state.page:st.session_state.page+display_size][i*col_height:i*col_height+col_height]:
-                st.image(img(idx), width=100, caption=idx)
+                st.image(img(idx), width=100)
                 sample_button1 = st.button(label="See more like this",
                                 key=idx)
                 if sample_button1:
@@ -160,7 +160,7 @@ with tab2:
             for i in range(5):
                 with subcols[i]:
                     for idx in groups[j][:display_size][st.session_state.page:st.session_state.page+display_size][i*col_height:i*col_height+col_height]:
-                        st.image(img(idx), width=100, caption=idx)
+                        st.image(img(idx), width=100)
                         sample_button1 = st.button(label="See more like this",
                                                 key="cat"+str(idx))
                         if sample_button1:
@@ -173,8 +173,7 @@ st.sidebar.markdown(
 recom_no = st.sidebar.slider('Number of Recommendations', 0, 50, 10, 5)
 if st.session_state.sample_idx >= 0:
     st.sidebar.markdown("# If you like... ")
-    st.sidebar.image(img(st.session_state.sample_idx), width=200,
-                        caption=st.session_state.sample_idx)
+    st.sidebar.image(img(st.session_state.sample_idx), width=200)
     st.sidebar.markdown("# you might also like...")
     subcols = st.sidebar.columns(3)
     recom_lst = get_similar_wrapped(
