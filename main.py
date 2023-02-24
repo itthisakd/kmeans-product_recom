@@ -200,18 +200,19 @@ with tab3:
     st.write("Number of clusters k: 8")
     st.write("Initialisation Method: k-means++")
     st.subheader("Evaluation Metrics")
-    st.write("Homogeneity Score")
+    st.markdown("### Homogeneity Score")
     st.write(h_score)
     st.write("– A clustering result satisfies homogeneity if all of its clusters contain only data points which are members of a single class. \nScore between 0.0 and 1.0. 1.0 stands for perfectly homogeneous labeling.  \n")
 
-    st.write("Completeness Score")
+    st.markdown("### Completeness Score")
     st.write(c_score)
     st.write("– A clustering result satisfies completeness if all the data points that are members of a given class are elements of the same cluster. \n Score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling. \n")
 
-    st.write("Silhouette Score")
+    st.markdown("### Silhouette Score")
     st.write(s_score)
     st.write("– A measure of how similar an object is to its own cluster(cohesion) compared to other clusters(separation). \n The best value is 1 and the worst value is -1. Values near 0 indicate overlapping clusters. Negative values generally indicate that a sample has been assigned to the wrong cluster, as a different cluster is more similar.")
-
+l;'
+'
 
 with tab4:
     st.header("Acknowledgements")
