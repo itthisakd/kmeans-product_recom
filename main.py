@@ -211,8 +211,6 @@ with tab3:
     st.markdown("### Silhouette Score")
     st.write(s_score)
     st.write("– A measure of how similar an object is to its own cluster(cohesion) compared to other clusters(separation). \n The best value is 1 and the worst value is -1. Values near 0 indicate overlapping clusters. Negative values generally indicate that a sample has been assigned to the wrong cluster, as a different cluster is more similar.")
-l;'
-'
 
 with tab4:
     st.header("Acknowledgements")
