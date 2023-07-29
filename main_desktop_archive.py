@@ -1,5 +1,3 @@
-# MOBILE ONLY
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -97,7 +95,7 @@ if 'page' not in st.session_state:
 if 'sample_idx' not in st.session_state:
     st.session_state.sample_idx = -1
 
-st.markdown('### Image-based Clothing Recommendation')
+st.title('Image-based Product Recommendation')
 
 # States
 
@@ -125,32 +123,27 @@ def get_similar_wrapped(sample_index, n_similar):
 tab1, tab2, tab3, tab4 = st.tabs(["Top Picks", "Browse by Category", "Model Evaluation", "Acknowledgements"])
 with tab1:
     # col1,col2=st.columns(2)
-    st.markdown("#### Choose products to view recommendations...")
+    st.subheader("Choose products to view similar recommendations")
     # with col1:
-    # button_layout = st.columns(7)
-    # with button_layout[0]:
-    #     prevpage = st.button(label="< Prev Page", type="primary")
-    #     if prevpage and st.session_state.page > 0:
-    #         st.session_state.page -= display_size
-    # with button_layout[1]:
-    #     nextpage = st.button(label="Next Page >", type="primary")
-    #     if nextpage and st.session_state.page < 10000/display_size:
-    #         st.session_state.page += display_size
-    col_num=3
-    subcols = st.columns(col_num)
-    col_height=20
-    initial_idx = initial_ids[0:50]
+    button_layout = st.columns(7)
+    with button_layout[0]:
+        prevpage = st.button(label="< Prev Page", type="primary")
+        if prevpage and st.session_state.page > 0:
+            st.session_state.page -= display_size
+    with button_layout[1]:
+        nextpage = st.button(label="Next Page >", type="primary")
+        if nextpage and st.session_state.page < 10000/display_size:
+            st.session_state.page += display_size
 
-    col_content = [
-        [v for i, v in enumerate(initial_idx) if i % 3 == 0],
-        [v for i, v in enumerate(initial_idx) if (i-1) % 3 == 0],
-        [v for i, v in enumerate(initial_idx) if (i-2) % 3 == 0]
-    ]
-    for i in range(3):
+
+
+    subcols = st.columns(4)
+    col_height=5
+    for i in range(4):
         with subcols[i]:
-            for idx in col_content[i]:
+            for idx in initial_ids[st.session_state.page:st.session_state.page+display_size][i*col_height:i*col_height+col_height]:
                 st.image(img(idx), width=100)
-                sample_button1 = st.button(label="See more",
+                sample_button1 = st.button(label="See more like this",
                                 key=idx)
                 if sample_button1:
                     st.session_state.sample_idx = idx
@@ -162,14 +155,13 @@ with tab2:
     for j, title in enumerate(["Ankleboots & Sandals","Bags","Dresses & Tops","T-shirt & Tops",
                                "Sneakers & Sandals","Coats, Pullovers & Tops","Trousers","Pullovers & Tops"]):
         with st.expander(str(title)):
-            col_num = 3
-            subcols = st.columns(col_num)
-            col_height = 2
-            for i in range(col_num):
+            subcols = st.columns(5)
+            col_height = 4
+            for i in range(5):
                 with subcols[i]:
                     for idx in groups[j][:display_size][st.session_state.page:st.session_state.page+display_size][i*col_height:i*col_height+col_height]:
                         st.image(img(idx), width=100)
-                        sample_button1 = st.button(label="See more",
+                        sample_button1 = st.button(label="See more like this",
                                                 key="cat"+str(idx))
                         if sample_button1:
                             st.session_state.sample_idx = idx
@@ -177,12 +169,11 @@ with tab2:
 
 
 st.sidebar.markdown(
-    "## Select a product to get recommendations",)
-# recom_no = st.sidebar.slider('Number of Recommendations', 0, 50, 10, 5)
-recom_no = 20
+    "## Select a product to get recommendations")
+recom_no = st.sidebar.slider('Number of Recommendations', 0, 50, 10, 5)
 if st.session_state.sample_idx >= 0:
     st.sidebar.markdown("# If you like... ")
-    st.sidebar.image(img(st.session_state.sample_idx), width=100)
+    st.sidebar.image(img(st.session_state.sample_idx), width=200)
     st.sidebar.markdown("# you might also like...")
     subcols = st.sidebar.columns(3)
     recom_lst = get_similar_wrapped(
@@ -196,12 +187,11 @@ if st.session_state.sample_idx >= 0:
     for i in range(3):
         with subcols[i]:
             for idx in col_content[i]:
-                st.image(img(idx), width=75)
-                sample_button2 = st.button(label="See more",
+                st.image(img(idx), width=100)
+                sample_button2 = st.button(label="See more like this",
                                             key=idx+9999)
                 if sample_button2:
                     st.session_state.sample_idx = idx
-                    st.experimental_rerun()
 
 with tab3:
     st.subheader("Model")
@@ -224,7 +214,7 @@ with tab3:
 with tab4:
     st.header("Acknowledgements")
     st.balloons()
-    st.markdown("###Thank you to Dr. Deyu Ming for your support and guidance.")
+    st.markdown("### *Thank you* Deyu!")
     st.write()
     # our_clusters, true_clusters = make_plots()
 
